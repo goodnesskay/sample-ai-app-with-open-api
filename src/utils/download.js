@@ -1,5 +1,6 @@
 const https = require('https');
 const fs = require('fs');
+const path = require('path');
 
 // Function to download a file
 function downloadFile(url, dest) {
@@ -17,6 +18,16 @@ function downloadFile(url, dest) {
     });
 }
 
+function getFileNameFromUrl(fileUrl) {
+    const parsedUrl = url.parse(fileUrl);
+    
+    const pathname = parsedUrl.pathname;
+
+    const fileName = path.basename(pathname);
+    return fileName;
+}
+
 module.exports = {
-    downloadFile
+    downloadFile,
+    getFileNameFromUrl
 }
