@@ -34,13 +34,13 @@ app.post('/api/v1/chat', async (req, res) => {
 
 app.post('/api/v1/transcription/create', async (req, res) => {
     const userInput = req.body.audioFile;
-    const dest = path.join(__dirname, fileDownloader.getFileNameFromUrl(userInput));
+    // const dest = path.join(__dirname, fileDownloader.getFileNameFromUrl(userInput));
     // const audioFile = fileDownloader.downloadFile(userInput,dest);
     
     try {
         const response = await openai.audio.transcriptions.create({
             model: 'whisper-1',
-            file: fs.createReadStream(userInput),
+            file: fs.createWriteStream(userInput),
         });
         res.json({ message: response });
     } catch (error) {
