@@ -2,7 +2,7 @@
   "name": "sample-ai-app-with-open-api",
   "version": "1.0.0",
   "description": "Sample AI app with Node and Open AI by Goodness Kayode",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
