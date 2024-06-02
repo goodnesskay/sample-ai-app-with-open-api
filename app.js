@@ -33,14 +33,12 @@ app.post('/api/v1/chat', async (req, res) => {
 });
 
 app.post('/api/v1/transcription/create', async (req, res) => {
-    const userInput = req.body.audioFile;
-    // const dest = path.join(__dirname, fileDownloader.getFileNameFromUrl(userInput));
-    // const audioFile = fileDownloader.downloadFile(userInput,dest);
+    // const userInput = req.body.audioFile;
     
     try {
         const response = await openai.audio.transcriptions.create({
             model: 'whisper-1',
-            file: fs.createWriteStream(userInput),
+            file: fs.createReadStream('./src/uploads/Free_Test_Data_1M3.mp3'),
         });
         res.json({ message: response });
     } catch (error) {
