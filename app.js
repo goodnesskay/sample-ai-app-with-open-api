@@ -13,12 +13,27 @@ app.use(bodyParser.json());
 
 app.post('/api/v1/chat', async (req, res) => {
     const userInput = req.body.message;
+    // res.json(userInput);
     try {
         const response = await openai.completions.create({
             model: "gpt-3.5-turbo",
-            messages: [{"role": "user", "content": "hello"}],
+            messages: [
+                { 
+                    "role": "user", 
+                    "content": userInput 
+                },
+                {
+                    "role": "assistant",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": "Hello! How can I assist you today?"
+                        }
+                    ]
+                }
+            ],
             max_tokens: 30,
-          });
+        });
         res.json({ message: response.data.choices[0].message.trim() });
     } catch (error) {
         res.status(500).send(error.message);
