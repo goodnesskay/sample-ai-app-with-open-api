@@ -2,6 +2,8 @@ const express = require('express');
 const fs = require('fs');
 const OpenAI = require('openai');
 const bodyParser = require('body-parser');
+const fileDownloader = require('./src/utils');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -31,12 +33,14 @@ app.post('/api/v1/chat', async (req, res) => {
 });
 
 app.post('/api/v1/transcription/create', async (req, res) => {
-    const userInput = req.file;
-    res.json(userInput);
+    const userInput = req.body.audioFile;
+    const dest = path.join(__dirname, 'downloaded_file.jpg');
+    const audioFile = fileDownloader.download(userInput,dest)
+
     try {
         const response = await openai.audio.transcriptions.create({
             model: 'whisper-1',
-            file: fs.createReadStream(userInput),
+            file: fs.createReadStream(audioFile),
         });
         res.json({ message: response });
     } catch (error) {
