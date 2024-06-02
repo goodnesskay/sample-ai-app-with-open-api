@@ -15,7 +15,7 @@ app.post('/api/v1/chat', async (req, res) => {
     const userInput = req.body.message;
     try {
         const response = await openai.completions.create({
-            model: "davinci-002",
+            model: "text-davinci-002",
             prompt: userInput,
             max_tokens: 30,
           });
