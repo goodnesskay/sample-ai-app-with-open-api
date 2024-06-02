@@ -2,8 +2,6 @@ const express = require('express');
 const fs = require('fs');
 const OpenAI = require('openai');
 const bodyParser = require('body-parser');
-const fileDownloader = require('./src/utils/download');
-const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -38,7 +36,7 @@ app.post('/api/v1/transcription/create', async (req, res) => {
     try {
         const response = await openai.audio.transcriptions.create({
             model: 'whisper-1',
-            file: fs.createReadStream('./src/uploads/Free_Test_Data_1M3.mp3'),
+            file: fs.createReadStream('./src/uploads/voice-over.mp3'),
         });
         res.json({ message: response });
     } catch (error) {
