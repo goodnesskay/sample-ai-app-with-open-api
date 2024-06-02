@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const OpenAI = require('openai');
 const bodyParser = require('body-parser');
-const fileDownloader = require('./src/utils');
+const fileDownloader = require('./src/utils/download');
 const path = require('path');
 
 const app = express();
