@@ -11,11 +11,11 @@ const openai = new OpenAI({
 
 app.use(bodyParser.json());
 
-app.post('/chat', async (req, res) => {
+app.post('/api/v1/chat', async (req, res) => {
     const userInput = req.body.message;
     try {
         const response = await openai.completions.create({
-            model: "text-davinci-003",
+            model: "davinci-002",
             prompt: userInput,
             max_tokens: 30,
           });
@@ -29,6 +29,6 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-app.get('/', (req, res) => {
+app.get('/api/v1/', (req, res) => {
     res.send('Hello World!');
 });
