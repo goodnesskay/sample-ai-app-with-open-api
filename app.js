@@ -21,10 +21,9 @@ app.post('/api/v1/chat', async (req, res) => {
                     "role": "user", 
                     "content": userInput 
                 }
-            ],
-            max_tokens: 30,
+            ]
         });
-        res.json({ message: response.data.choices[0].message.trim() });
+        res.json({ message: response.choices[0].message });
     } catch (error) {
         res.status(500).send(error.message);
     }
