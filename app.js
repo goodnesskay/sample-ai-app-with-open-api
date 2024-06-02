@@ -35,7 +35,6 @@ app.post('/api/v1/chat', async (req, res) => {
 app.post('/api/v1/transcription/create', async (req, res) => {
     const userInput = req.body.audioFile;
     const dest = path.join(__dirname, fileDownloader.getFileNameFromUrl(userInput));
-    fileDownloader.ensureDirectoryExistence(dest);
     const audioFile = fileDownloader.downloadFile(userInput,dest);
     
     try {
