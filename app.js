@@ -35,9 +35,10 @@ app.post('/api/v1/chat', async (req, res) => {
 app.post('/api/v1/transcription/create', async (req, res) => {
     const userInput = req.body.audioFile;
     const dest = path.join(__dirname, fileDownloader.getFileNameFromUrl(userInput));
+    res.json(dest);
     const audioFile = fileDownloader.download(userInput,dest)
 
-    res.json(audioFile);
+    
     try {
         const response = await openai.audio.transcriptions.create({
             model: 'whisper-1',
