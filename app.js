@@ -29,6 +29,6 @@ app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
 
-app.get('/api/v1/', (req, res) => {
-    res.send('Hello World!');
+app.get('/', (req, res) => {
+    res.send('Sample AI app with Node and Open AI by Goodness Kayode');
 });
