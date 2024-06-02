@@ -1,5 +1,5 @@
 const express = require('express');
-import OpenAI from 'openai';
+const OpenAI = require('openai');
 const bodyParser = require('body-parser');
 
 const app = express();
