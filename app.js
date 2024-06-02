@@ -36,11 +36,10 @@ app.post('/api/v1/transcription/create', async (req, res) => {
     const userInput = req.body.audioFile;
     const dest = path.join(__dirname, fileDownloader.getFileNameFromUrl(userInput));
     fileDownloader.ensureDirectoryExistence(dest);
-    res.json(dest);
     const audioFile = fileDownloader.download(userInput,dest)
-
     
     try {
+        res.json(dest);
         const response = await openai.audio.transcriptions.create({
             model: 'whisper-1',
             file: fs.createReadStream(audioFile),
