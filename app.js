@@ -29,6 +29,20 @@ app.post('/api/v1/chat', async (req, res) => {
     }
 });
 
+app.post('/api/v1/transcription/create', async (req, res) => {
+    const userInput = req.body.audioFile;
+    res.json(userInput);
+    try {
+        const response = await openai.audio.transcriptions.create({
+            model: 'whisper-1',
+            file: fs.createReadStream(userInput),
+        });
+        res.json({ message: response });
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+});
+
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
