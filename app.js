@@ -13,11 +13,15 @@ app.use(bodyParser.json());
 
 app.post('/api/v1/chat', async (req, res) => {
     const userInput = req.body.message;
-    // res.json(userInput);
     try {
-        const response = await openai.completions.create({
+        const response = await openai.chat.completions.create({
             model: "gpt-3.5-turbo",
-            prompt: userInput,
+            messages: [
+                { 
+                    "role": "user", 
+                    "content": userInput 
+                }
+            ],
             max_tokens: 30,
         });
         res.json({ message: response.data.choices[0].message.trim() });
