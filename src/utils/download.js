@@ -3,6 +3,16 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
+
+function ensureDirectoryExistence(dirPath) {
+    if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+        console.log(`Directory created: ${dirPath}`);
+    } else {
+        console.log(`Directory already exists: ${dirPath}`);
+    }
+}
+
 // Function to download a file
 function downloadFile(url, dest) {
     const file = fs.createWriteStream(dest);
@@ -29,5 +39,6 @@ function getFileNameFromUrl(fileUrl) {
 
 module.exports = {
     downloadFile,
-    getFileNameFromUrl
+    getFileNameFromUrl,
+    ensureDirectoryExistence
 }
