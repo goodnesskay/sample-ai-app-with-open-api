@@ -31,7 +31,7 @@ app.post('/api/v1/chat', async (req, res) => {
 });
 
 app.post('/api/v1/transcription/create', async (req, res) => {
-    const userInput = req.body;
+    const userInput = req.file;
     res.json(userInput);
     try {
         const response = await openai.audio.transcriptions.create({
